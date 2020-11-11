@@ -2,17 +2,17 @@
 
  
 param m := 21 ;
-param n := 99 ;
+param n :=99 ;
 
-param gastos_fijos := 0;
-param tra_permitidos := 100;
+param gastos_fijos := 5000000;
+param tra_permitidos := 75;
 param cont_max := 100;
-param prod_min:= 10;
-param gan_min :=500;
-param presupuesto := 10000;
+param prod_min:= 17000;
+param gan_min :=200;
+param presupuesto := 30000000;
 param fase := 1;
-param precio_etico := 0;
-param min_tra := 50;
+param precio_etico := 1600;
+param min_tra := 25;
 
  
 param C:= 
