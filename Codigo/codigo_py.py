@@ -84,16 +84,16 @@ def restriccion_comuna(m,j): #Restriccion por comuna en cuarentena
 model.Comuna_r = pyo.Constraint(model.J, rule = restriccion_comuna)
 
 def activacion_horastrabajo(m,j): #Activacion variable tiempo
-    return 100*m.x[j] >= m.t_tra[j]
+    return 1000*m.x[j] >= m.t_tra[j]
 model.activar_var = pyo.Constraint(model.J,rule = activacion_horastrabajo)
 
 def restriccion_horastrabajo_i(m,j): #Restriccion de horas de trabajo
-    return  m.t_tra[j] - 4 + 10*(1-m.x[j]) >= 0
+    return  m.t_tra[j] - 80 + 1000*(1-m.x[j]) >= 0
 model.horas_i = pyo.Constraint(model.J,rule = restriccion_horastrabajo_i)
 
 
 def restriccion_horastrabajo_s(m,j): #Restriccion de horas de trabajo maximo para un trabajador
-    return 100*(1-m.x[j]) >= m.t_tra[j] - 8
+    return 1000*(1-m.x[j]) >= m.t_tra[j] - 160
 model.horas_s = pyo.Constraint(model.J,rule = restriccion_horastrabajo_s)
 
 
