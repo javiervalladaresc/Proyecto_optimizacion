@@ -37,7 +37,7 @@ model.Cont = pyo.Param(model.J)
 model.x = pyo.Var(model.J, within=pyo.Binary)
 model.p = pyo.Var(model.I, within=pyo.NonNegativeReals,bounds=(0,1700))
 model.t_pro = pyo.Var(model.I, within=pyo.NonNegativeReals, bounds=(1,12), initialize=1)
-model.t_tra = pyo.Var(model.J, within=pyo.NonNegativeReals, bounds=(4,8), initialize=4)
+model.t_tra = pyo.Var(model.J, within=pyo.NonNegativeReals, bounds=(0,8), initialize=0)
 
 
 
@@ -80,17 +80,20 @@ model.Max_cont = pyo.Constraint(rule = restriccion_contaminacion)
 
 
 def restriccion_comuna(m,j): #Restriccion por comuna en cuarentena
-        return  m.F[j] - m.fase >= m.x[j] 
+    return  m.F[j] - m.fase >= m.x[j] 
 model.Comuna_r = pyo.Constraint(model.J, rule = restriccion_comuna)
 
+def activacion_horastrabajo(m,j): #Activacion variable tiempo
+    return 100*m.x[j] >= m.t_tra[j]
+model.activar_var = pyo.Constraint(model.J,rule = activacion_horastrabajo)
 
 def restriccion_horastrabajo_i(m,j): #Restriccion de horas de trabajo
-    return m.t_tra[j]>=4
+    return  m.t_tra[j] - 4 + 10*(1-m.x[j]) >= 0
 model.horas_i = pyo.Constraint(model.J,rule = restriccion_horastrabajo_i)
 
 
 def restriccion_horastrabajo_s(m,j): #Restriccion de horas de trabajo maximo para un trabajador
-    return 8 >= m.t_tra[j]
+    return 100*(1-m.x[j]) >= m.t_tra[j] - 8
 model.horas_s = pyo.Constraint(model.J,rule = restriccion_horastrabajo_s)
 
 
