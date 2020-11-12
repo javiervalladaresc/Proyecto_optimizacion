@@ -44,7 +44,7 @@ model.t_tra = pyo.Var(model.J, within=pyo.NonNegativeReals, bounds=(0,8), initia
 
 #Funcion objetivo
 def obj_expresion(m):
-    return -sum(m.Q[i]*m.p[i]*m.t_pro[i] for i in m.I) + sum(m.Q[i]*m.C[i]*m.t_pro[i] for i in m.I) + sum(m.x[j]*m.S[j]*m.t_tra[j] for j in m.J) + m.gastos_fijos
+    return -30*sum(m.Q[i]*m.p[i]*m.t_pro[i] for i in m.I) + 30*sum(m.Q[i]*m.C[i]*m.t_pro[i] for i in m.I) + sum(m.x[j]*m.S[j]*m.t_tra[j] for j in m.J) + m.gastos_fijos
 
 model.OBJ = pyo.Objective(rule = obj_expresion)
 
@@ -98,12 +98,12 @@ model.horas_s = pyo.Constraint(model.J,rule = restriccion_horastrabajo_s)
 
 
 def restriccion_produccion(m,i): #Restriccion de horas minimas de un trabajador
-    return m.Q[i]*m.t_pro[i] >= m.prod_min  
+    return 30*m.Q[i]*m.t_pro[i] >= m.prod_min  
 model.Produccion_r = pyo.Constraint(model.I,rule = restriccion_produccion)
 
 
 def restriccion_presupuesto(m): #Restriccion de presupuesto de la empresa
-    return m.presupuesto >= sum(m.Q[i]*m.C[i]*m.t_pro[i] for i in m.I) + sum(m.x[j]*m.S[j]*m.t_tra[j] for j in m.J) 
+    return m.presupuesto >= 30*sum(m.Q[i]*m.C[i]*m.t_pro[i] for i in m.I) + sum(m.x[j]*m.S[j]*m.t_tra[j] for j in m.J) 
 model.Presupuesto_r = pyo.Constraint(rule = restriccion_presupuesto)
 
 
