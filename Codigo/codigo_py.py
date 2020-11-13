@@ -101,7 +101,7 @@ def restriccion_produccion(m,i): #Restriccion de horas minimas de un trabajador
     return 30*m.Q[i]*m.t_pro[i] >= m.prod_min  
 model.Produccion_r = pyo.Constraint(model.I,rule = restriccion_produccion)
 
-def restriccion_hrsproduccion(m,i):
+def restriccion_hrsproduccion(m,i): #Restriccion de horas maximas de produccion
     return 360 >= m.t_pro[i]
 model.hrsproduccion = pyo.Constraint(model.I, rule = restriccion_hrsproduccion)
 
