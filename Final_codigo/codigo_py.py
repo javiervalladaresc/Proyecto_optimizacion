@@ -34,7 +34,7 @@ model.D = pyo.Param(model.J)
 model.Cont = pyo.Param(model.J)
 
 #Variables de decision
-model.x = pyo.Var(model.J, within=pyo.Binary)
+model.x = pyo.Var(model.J,within = pyo.Binary)
 model.p = pyo.Var(model.I, within=pyo.NonNegativeReals,bounds=(0,1700))
 model.t_pro = pyo.Var(model.I, within=pyo.NonNegativeReals, bounds=(1,12), initialize=1)
 model.t_tra = pyo.Var(model.J, within=pyo.NonNegativeReals, bounds=(0,8), initialize=0)

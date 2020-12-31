@@ -14,7 +14,7 @@ comunas = {'santiago' : 5, 'renca':10,'maipu':17,'puente_alto':27,'san_bernardo'
             'la_pintana':24,'el_bosque':16,'penalolen':12,'cerro_navia':10,'pudahuel':12,'macul':9,'cerrillos':10,
             'la_florida':20,'recoleta':7,'la_granja':18}
 
-contaminacion = [0,0.53,0.16]
+contaminacion = [ 0.53,0.16]
 
 sueldos = [3000,2500,2700]
 
